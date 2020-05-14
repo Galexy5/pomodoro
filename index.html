@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+			<link rel="stylesheet" type="text/css" href="pom.css">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+	<title>Pomodoro</title>
+</head>
+<body>
+<div class="operators">
+
+<button value="+">+</button>
+<span class="session">Session:<span class="session-minutes">10</span></span>	
+<button value="-">-</button>
+
+
+
+
+
+<button class="break" value="+">+</button>	<span>Break:<span class="break-minutes">5</span></span>	<button class="break" value="-">-</button>
+</div>
+
+
+
+<div class="buttons">
+	<button class="start">Start</button>
+	<button class="stop">Stop</button>
+</div>
+	
+
+
+
+
+
+
+<span class="display"><span class="display-minutes">10</span>:<span class="seconds">00</span></span>
+	
+
+
+
+<script type="text/javascript">
+
+let session_minutes_element=document.querySelector('.session-minutes');
+let session_minutes=parseInt(document.querySelector('.session-minutes').innerText);
+
+let break_minutes_element=document.querySelector('.break-minutes');
+let break_minutes=parseInt(document.querySelector('.break-minutes').innerText);
+
+
+let seconds_element=document.querySelector('.seconds');
+let seconds=parseInt(document.querySelector('.seconds').innerText);
+
+
+let display_minutes_element=document.querySelector('.display-minutes');
+let display_minutes=parseInt(document.querySelector('.display-minutes').innerText);
+
+
+const start=document.querySelector('.start');
+const stop=document.querySelector('.stop');
+const operators=document.querySelector('.operators');
+
+
+
+let start_is_pressed=false;
+let stop_is_pressed=true;
+
+let session_time=true;
+let break_time=false;
+
+
+
+operators.addEventListener("click", function(event)
+{
+	if(stop_is_pressed)
+	{
+		
+
+		if(event.target.className!="break")
+		{
+			if(session_minutes>=1){
+				
+					if(event.target.value=="+")
+					{
+						session_minutes++;
+						display_minutes++;
+					}else
+					{
+						session_minutes--;
+						display_minutes--;
+					}
+			
+			if(session_minutes==0) session_minutes=1;
+
+
+					if(session_minutes<10) 
+					{
+						session_minutes_element.innerText="0"+session_minutes.toString();
+						display_minutes_element.innerText="0"+session_minutes.toString();
+
+					}else
+					{
+						session_minutes_element.innerText=session_minutes.toString();
+						display_minutes_element.innerText=session_minutes.toString();
+					} 
+
+		}}else
+		{
+			if(break_minutes>=1)
+			event.target.value=="+" ? break_minutes++ : break_minutes-- ;
+
+
+			if(break_minutes==0) break_minutes=1;
+
+			if(break_minutes<10) 
+			{
+				break_minutes_element.innerText="0"+break_minutes.toString();
+			}else break_minutes_element.innerText=break_minutes.toString();
+		}
+				
+
+	}else
+	{
+		event.target.disabled=true;
+	}
+	
+	
+	
+
+});
+
+
+
+let timer;
+
+
+
+
+
+
+
+stop.addEventListener("click", function()   // STOP BUTTON PRESSED
+	{
+		clearInterval(timer);
+		display_minutes=session_minutes;
+		seconds=0;
+
+		if(display_minutes<10)
+		{
+			display_minutes_element.innerText="0"+display_minutes;
+		}else 	display_minutes_element.innerText=display_minutes;
+	
+		seconds_element.innerText="0"+seconds;
+
+		stop_is_pressed=true;
+		start_is_pressed=false;
+		event.target.disabled=true;
+		start.disabled=false;
+	});
+
+
+
+
+start.addEventListener("click",function(event)
+{
+
+
+start_is_pressed=true;
+
+
+
+event.target.disabled=true;
+stop.disabled=false;
+
+timer=setInterval(function()
+{
+
+		if(display_minutes>=0)
+		{
+
+
+				if(display_minutes<10 && seconds<10)
+				{
+					display_minutes_element.innerText="0"+display_minutes;
+					seconds_element.innerText="0"+seconds;
+				}else if(display_minutes>=10 && seconds<10)
+				{
+					display_minutes_element.innerText=display_minutes;
+					seconds_element.innerText="0"+seconds;
+				}else if(display_minutes<10 && seconds>=10)
+				{
+					display_minutes_element.innerText="0"+display_minutes;
+					seconds_element.innerText=seconds;
+				}
+				else
+				{
+					display_minutes_element.innerText=display_minutes;
+					seconds_element.innerText=seconds;
+				}
+
+		 
+				if(seconds==0)
+					{
+						seconds=59;
+						display_minutes--;
+					}else
+					{
+						seconds--;
+					}
+			
+
+		}else
+		{
+			if(break_time)
+			{
+				break_time=false;
+				session_time=true;
+				display_minutes=session_minutes;
+				seconds=0;
+			}else
+			{
+				break_time=true;
+				session_time=false;
+				display_minutes=break_minutes;
+				seconds=0;
+			}
+		}
+
+
+
+
+
+},1000);
+
+
+
+});
+
+
+</script>
+</body>
+</html>
