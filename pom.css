@@ -1,0 +1,95 @@
+
+body{
+background-image: url("bg.jpg");
+background-repeat: no-repeat;
+
+}
+
+
+.container{
+  /*margin:0 auto;*/
+ /* top:50%;
+  left:50%;*/
+  width: 400px;
+  height: 400px;
+  margin-top: 350px;
+  margin-left: 750px;
+  position: relative;
+  overflow: auto;   
+
+}
+
+
+.session-buttons{
+	position: absolute;
+	top:90px;
+	left:20px;
+}
+
+.break-buttons{
+	position: absolute;
+	top:90px;
+	right:30px;
+}
+
+.session-text{
+
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	left:0;
+	bottom: 250px;
+		
+}
+
+.break-text{
+
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	right:25px;
+	bottom: 250px;
+		
+}
+
+.display{
+	width:30px;
+	height: 30px;
+	position: absolute;
+	font-weight: bold;
+	font-size: 45px;
+	text-align:center;
+	bottom: 180px;
+	left:130px;
+	/*margin-top: 70px;
+	margin-left: 140px;*/
+}
+
+.stop{
+	position: absolute;
+	left: 100px;
+	font-weight:bold;
+}
+
+.start{
+	position: absolute;
+	left:-20px;
+	font-weight:bold;
+}
+
+.operators button{
+
+font-weight: bold;
+}
+
+
+.break-time-text{
+	position: absolute;
+	bottom:60px;
+	left:80px;
+	font-size: 23px;
+	font-weight:bold;
+	font-style: italic;
+}
+
+
