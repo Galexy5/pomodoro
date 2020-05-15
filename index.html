@@ -73,9 +73,9 @@ operators.addEventListener("click", function(event)
 {
 	if(stop_is_pressed)
 	{
-		
+	
 
-		if(event.target.className!="break")
+		if(event.target.className!="break") // Session +  and  -
 		{
 			if(session_minutes>=1){
 				
@@ -103,7 +103,7 @@ operators.addEventListener("click", function(event)
 						display_minutes_element.innerText=session_minutes.toString();
 					} 
 
-		}}else
+		}}else //  Break +  and -
 		{
 			if(break_minutes>=1)
 			event.target.value=="+" ? break_minutes++ : break_minutes-- ;
@@ -118,10 +118,8 @@ operators.addEventListener("click", function(event)
 		}
 				
 
-	}else
-	{
-		event.target.disabled=true;
 	}
+	
 	
 	
 	
@@ -155,6 +153,9 @@ stop.addEventListener("click", function()   // STOP BUTTON PRESSED
 		start_is_pressed=false;
 		event.target.disabled=true;
 		start.disabled=false;
+		session_time=true;
+		break_time=false;
+		
 	});
 
 
@@ -165,7 +166,9 @@ start.addEventListener("click",function(event)
 
 
 start_is_pressed=true;
+stop_is_pressed=false;
 
+operators.disabled=true;
 
 
 event.target.disabled=true;
